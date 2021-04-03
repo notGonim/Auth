@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import picLogo  from '../../img/logo192.png'
+import picLogo from '../../img/logo192.png'
 import { Button } from 'react-bootstrap'
 import './nav.css'
 
@@ -20,8 +20,8 @@ export const Nav = () => {
                     </div>
                 </div>
                 <div className="btn_containers">
-                    <Link to="/login" >LogIn</Link>
-                    <Link to="/signup" >SignUp</Link>
+                    <Link to="/login" className="btn btn_login " >LogIn</Link>
+                    <Link to="/signup" className="btn btn_signup  ">SignUp</Link>
                 </div>
             </nav>
 

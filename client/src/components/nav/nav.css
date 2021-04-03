@@ -18,3 +18,22 @@ nav{
     width: 45px;
     object-fit: contain;
 }
+
+a:hover {
+    text-decoration:none; 
+ }
+
+ .btn{
+     font-size: 18px;
+     padding: 10px;
+     margin: 5px;
+     font-weight: 500;
+     color:#fff;
+ }
+ .btn_login{
+    background-color: #008CBA;
+
+ }
+ .btn_signup{
+    background-color: #4CAF50
+ }
