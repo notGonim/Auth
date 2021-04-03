@@ -20,7 +20,7 @@ export const Nav = () => {
                     </div>
                 </div>
                 <div className="btn_containers">
-                    <Link to="/login" className="btn btn_login " >LogIn</Link>
+                    <Link to="/login" className="btn btn_loginn " >LogIn</Link>
                     <Link to="/signup" className="btn btn_signup  ">SignUp</Link>
                 </div>
             </nav>

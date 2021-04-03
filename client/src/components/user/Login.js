@@ -1,17 +1,19 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-
+import { Link } from 'react-router-dom'
+import './login.css'
 
 export const Login = () => {
     return (
         <>
-            <Container fluid>
-                <Row>
-                    <Col><h2>LogIn</h2></Col>
-                </Row>
-            </Container>
+            <div className="login_container">
+                <h1 >LogIn</h1>
+                <div className="form_container">
+                    <input type="email" placeholder="Write Your Email " />
+                    <input type="password" placeholder="Write Your Password" />
+                    <button className="btn_login"> Login</button>
+                </div>
+                <p>if you don`t have an account <Link to='/signup' className="span_color">Create new account</Link></p>
+            </div>
         </>
     )
 }
