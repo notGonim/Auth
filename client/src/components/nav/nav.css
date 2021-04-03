@@ -37,3 +37,13 @@ a:hover {
  .btn_signup{
     background-color: #4CAF50
  }
+ .btn_sign{
+         background-color: #4CAF50;
+         border: none;
+         border-radius: 5px;
+         font-size: 25px;
+         padding: 10px;
+         margin: 5px;
+         font-weight: 600;
+         color:#fff;
+ }
