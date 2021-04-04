@@ -9,12 +9,12 @@ import { app } from "./app.js";
 
 
 //add the port that server will run on which is going to be 5000
-const port = process.env.PORT || 5000 
+const port = process.env.PORT || 5000
 
 //handle uncaught exceptions 
-process.on('uncaughtException',err=>{
+process.on('uncaughtException', err => {
     console.log(`ERROR: ${err.stack}`);
-    console.log('Shutting down due to uncaught exception');
+    //Shutting down due to uncaught exception
     process.exit(1)
 })
 
@@ -40,6 +40,9 @@ const server = app.listen(port, () => {
 
 //handle the unhandled promise rejections 
 process.on('unhandledRejection', err => {
+
+    //Shutting down the server due to Unhandled Promise Rejection coz server should not be running anymore 
+    console.log(`Error : ${err.message}`)
     server.close(() => {
         process.exit(1)
     })
