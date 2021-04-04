@@ -8,5 +8,5 @@ export const connectDB = async () => {
         useCreateIndex: true,
         useFindAndModify: true,
     });
-    console.log("MongoDB Connected");
+    console.log("Databases Connected");
 };
