@@ -1,8 +1,8 @@
 import express from 'express'
-import { registerUser } from '../controllers/user_controller'
+import { registerUser } from '../controllers/user_controller.js'
 
 
 export const UserRouter = express.Router()
 
 
-UserRouter.post('/api/signup', registerUser)
+UserRouter.post('/signup', registerUser)

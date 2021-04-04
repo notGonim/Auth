@@ -1,7 +1,8 @@
 import bodyParser from 'body-parser'
-import cookieParser from  'cookie-parser'
+import cookieParser from 'cookie-parser'
 import express from 'express'
 import { errors } from './middlewares/errors.js'
+import { UserRouter } from './routes/user_route.js'
 
 
 
@@ -18,7 +19,7 @@ app.use(cookieParser())
 
 
 //to handle all the routes that related user 
-
+app.use('/api', UserRouter)
 
 
 

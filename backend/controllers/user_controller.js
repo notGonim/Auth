@@ -1,4 +1,4 @@
-import { asyncError } from "../middleware/catchAsyncErrors.js"
+import { asyncError } from "../middlewares/catchAsyncErrors.js"
 import User from "../models/user_model.js"
 
 
