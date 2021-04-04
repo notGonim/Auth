@@ -38,5 +38,17 @@ const userSchema = new mongoose.Schema(
     }
 )
 
+
+//Encrypting user`s password before saving user 
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        next()
+    }
+    this.password = await bcrypt.hash(this.password, 10)
+
+})
+
+
+
 const User = mongoose.model('Users', userSchema)
 export default User
