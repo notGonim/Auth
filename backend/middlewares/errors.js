@@ -15,6 +15,8 @@ export const errors = (err, req, res, next) => {
     }
 
 
+    // Should add the production handle errors 
+    
 
 
     res.status(err.statusCode).json(
