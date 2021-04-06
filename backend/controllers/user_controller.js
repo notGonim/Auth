@@ -24,28 +24,27 @@ export const registerUser = asyncError(async (req, res, next) => {
 export const loginUser = asyncError(async (req, res, next) => {
 
     const { email, password } = req.body
-
     //check if user enter his email and password 
-    if (!email || !password)
+    if (!email || !password) 
         return next(new ErrorHandler('Please enter your email and password', 400))
-
+    
     //Finding user in databases  
     /*  Here i search for the user and then select the email and password 
     .select coz in the user model i specified the select to be false coz 
     i don`t want to get that password  while fetching the user  */
-    const user = User.findOne({ email }).select('+password')
+    const user = await User.findOne({ email }).select('+password')
 
     //check if user enter a valid data 
-    if (!user)
+    if (!user) 
         return next(new ErrorHandler('Please enter valid data', 401))
-
+    
     //check if password match 
     const isPasswordMatch = await user.comparePassword(password)
-    if (!isPasswordMatch)
+    if (!isPasswordMatch) 
         return next(new ErrorHandler('Password is not valid', 401))
-
+    
     const token = user.getJwtToken()
-    res.status(201).json({
+    res.status(200).json({
         success: true,
         token
     })
