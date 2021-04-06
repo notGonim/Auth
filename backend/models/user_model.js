@@ -54,7 +54,11 @@ userSchema.methods.getJwtToken = function () {
         expiresIn: process.env.JWT_EXPIRE_IN
     })
 }
+//compare password the one that user entered and the other one that saved on our databases 
 
+userSchema.methods.comparePassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password)
+}
 
 const User = mongoose.model('Users', userSchema)
 export default User
