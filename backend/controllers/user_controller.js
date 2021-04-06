@@ -2,6 +2,7 @@ import { asyncError } from "../middlewares/catchAsyncErrors.js"
 import User from "../models/user_model.js"
 import { ErrorHandler } from "../utils/errorHandler.js"
 import { sendToken } from "../utils/jwtToken.js"
+import { sendEmail } from "../utils/sendEmail.js"
 
 
 
@@ -59,7 +60,7 @@ export const resetPassword = asyncError(async (req, res, next) => {
 
     //Create reset password url 
     const resetUrl = `${req.protocol}://${req.get('host')}/api/password/reset/${resetToken}`
-    const message = `Your password reset token is as follow : \n\n${resetUrl}\n\n If you have not requested this email Ignore it `
+    const message = `Your password reset token is as follow :\n\n${resetUrl}\n\n If you have not requested this email Ignore it `
 
 
     try {
@@ -76,7 +77,6 @@ export const resetPassword = asyncError(async (req, res, next) => {
     } catch (err) {
         user.resetPasswordToken = undefined
         user.resetPasswordExpire = undefined
-
         await user.save({ validateBeforeSave: false })
         return next(new ErrorHandler(err.message, 500))
     }

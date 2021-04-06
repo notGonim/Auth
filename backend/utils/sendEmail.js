@@ -1,22 +1,29 @@
 
 import nodemailer from 'nodemailer'
 
-export const sendEmail = async data => {
+export const sendEmail = async options => {
     const transporter = nodemailer.createTransport({
-        host: process.env.SMIP_HOST,
-        port: process.env.SMIP_PORT,
+        host: "smtp.mailtrap.io",
+        port: 2525,
         auth: {
-            user: process.env.SMIP_EMAIL,
-            pass: process.env.SMIP_PASSWORD
+            user: "65c1b347b13cb3",
+            pass: "d6119bf005595a"
         }
     });
 
 
-    const message = {
-        from: `${process.env.SMIP_FROM_EMAIL} <${process.env.SMIP_FROM_EMAIL}>`,
-        to: data.email,
-        subject: data.subject,
-        text: data.message
+    const mailOptions = {
+        from: 'mhmodgonim96@gmail.com',
+        to: options.email,
+        subject: options.subject,
+        text: options.message
     }
-    await transporter.sendMail(message)
+    await transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    })
+
 }
