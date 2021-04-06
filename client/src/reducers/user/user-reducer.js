@@ -36,3 +36,5 @@ const UserReducer = (state = INITIAL_STATE, action) => {
             return state;
     }
 }
+
+export default UserReducer
