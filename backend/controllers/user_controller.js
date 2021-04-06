@@ -74,7 +74,7 @@ export const resetPassword = asyncError(async (req, res, next) => {
             success: true,
             message: `Email sent to ${user.email}`
         })
-    } catch (err) {
+    }catch (err) {
         user.resetPasswordToken = undefined
         user.resetPasswordExpire = undefined
         await user.save({ validateBeforeSave: false })
