@@ -41,4 +41,12 @@ export const loginUser = asyncError(async (req, res, next) => {
 
     //check if password match 
     const isPasswordMatch = await user.comparePassword(password)
+    if (!isPasswordMatch)
+        return next(new ErrorHandler('Password is not valid', 401))
+
+    const token = user.getJwtToken()
+    res.status(201).json({
+        success: true,
+        token
+    })
 })
