@@ -3,6 +3,7 @@ import User from "../models/user_model.js"
 import { ErrorHandler } from "../utils/errorHandler.js"
 import { sendToken } from "../utils/jwtToken.js"
 import { sendEmail } from "../utils/sendEmail.js"
+import crypto from 'crypto'
 
 
 
@@ -74,7 +75,7 @@ export const resetPassword = asyncError(async (req, res, next) => {
             success: true,
             message: `Email sent to ${user.email}`
         })
-    }catch (err) {
+    } catch (err) {
         user.resetPasswordToken = undefined
         user.resetPasswordExpire = undefined
         await user.save({ validateBeforeSave: false })
@@ -83,7 +84,31 @@ export const resetPassword = asyncError(async (req, res, next) => {
 
 })
 
+//to implement the functionality of resetting password   /api/reset/:token
+export const passwordReset = asyncError(async (req, res, next) => {
 
+    //Hash the URL token 
+    const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
+    //find that user by the hashed token 
+    const user = await User.findOne({ resetPasswordToken, resetPasswordExpire: { $gt: Date.now() } })
+
+    if (!user)
+        return next(new ErrorHandler('Password reset token is Invalid or has been expired ', 400))
+    const password = req.body.password
+    const confirmPassword = req.body.confirmPassword
+    if (password !== confirmPassword) {
+        return next(new ErrorHandler('Password does not match', 400))
+    }
+    //setting up new password 
+    user.password = password
+
+    user.resetPasswordToken = undefined
+    user.resetPasswordExpire = undefined
+
+    await user.save()
+    sendToken(user, 200, res)
+
+})
 
 //Logout user   ===> /api/logout 
 export const logOut = asyncError(async (req, res, next) => {
